@@ -171,13 +171,12 @@ cd $BUILD_DIR/FFmpeg*
 PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --prefix="$TARGET_DIR" \
   --pkg-config-flags="--static" \
-  --extra-cflags="-I$TARGET_DIR/include" \
-  --extra-ldflags="-L$TARGET_DIR/lib" \
+  --extra-cflags="-I$TARGET_DIR/include -static" \
+  --extra-ldflags="-L$TARGET_DIR/lib -static" \
   --bindir="$BIN_DIR" \
   --enable-ffplay \
   --enable-ffserver \
   --enable-gpl \
-  --enable-libass \
   --enable-libfdk-aac \
   --enable-libfreetype \
   --enable-libmp3lame \
@@ -188,6 +187,7 @@ PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
   --enable-libx264 \
   --enable-libx265 \
   --enable-nonfree
+  # --enable-libass # We currently can't have a static build with this enabled.
 PATH="$BIN_DIR:$PATH" make -j$NPROC
 make install
 make distclean
