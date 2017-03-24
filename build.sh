@@ -128,6 +128,7 @@ make install
 echo "*** Building x265 ***"
 cd $BUILD_DIR/x265*
 cd build/linux
+[ $rebuild -eq 1 ] && find . -mindepth 1 ! -name 'make-Makefiles.bash' -and ! -name 'multilib.sh' -exec rm -r {} +
 PATH="$BIN_DIR:$PATH" cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="$TARGET_DIR" -DENABLE_SHARED:bool=off ../../source
 make -j $jval
 make install
